@@ -2,9 +2,12 @@
 The following sections describe the *recommended* upgrade scheme.  Note:
 no changes to the Open Banking API itself is needed.
 ### 1. Deploy a Locally Trusted Certificate
-Since traditional TTP services **MUST NOT** be able using the new mode,
+Since arbitrary TTP services **MUST NOT** be able using the new mode,
 a specific locally trusted certificate for TLS client-certificate authentication
 **MUST** be deployed and recognized by the Open Banking API implementation.
+
+Note: selected TTPs *may* also use this mode of operation, although it would
+require a specific agreement between the TTP and the bank.
 ### 2. Update OAuth2 "authorize" Method
 In the new mode (as recognized by \#1) OAuth2 authorization normally only happens
 during enrollment of virtual payment cards.
@@ -59,4 +62,4 @@ simply appear as an additional choice in the on-line bank.
 
 &nbsp;
 
-Version 0.2, 2019-12-07
+Version 0.3, 2020-02-10
