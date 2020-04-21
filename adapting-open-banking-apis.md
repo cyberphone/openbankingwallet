@@ -1,10 +1,10 @@
 ## Adapting an Open Banking API Implementation
 The following sections describe the *recommended* upgrade scheme.  Note:
 no changes to the Open Banking API itself is needed.
-### 1. Deploy a Locally Trusted Certificate
+### 1. Create a Locally Trusted PKI
 Since arbitrary TTP services **MUST NOT** be able using the new mode,
-a specific locally trusted certificate for TLS client-certificate authentication
-**MUST** be deployed and recognized by the Open Banking API implementation.
+specific locally trusted certificates for TLS client-certificate authentication
+and signatures **MUST** be deployed and recognized by the Open Banking API implementation.
 
 Note: selected TTPs *may* also use this mode of operation, although it would
 require a specific agreement between the TTP and the bank.
@@ -41,9 +41,12 @@ the authorization response.  If supplied it
 **MUST** be a string of UTF-8 characters supplied in the extension
 property `human_name`.
 ### 3. Suppress SCA Requests
-Since the proposed "Wallet" scheme performs SCA (Strong Customer Authentication)
+Since a suitable "Wallet" scheme performs SCA (Strong Customer Authentication)
 in a similar way to the EMV standard, the Open Banking API **MUST NOT**
 ask the user for additional authentications.
+
+Note: if there is a need for additional user interactions, they **MUST** be delegated
+to the associated payment service.
 ### 4. Make `refresh_token` Life-time Unlimited
 In the new mode, `refresh_token` may be renewed as usual but they **MUST NOT** expire.
 ### 5. Grant Consent Requests by Default
@@ -51,7 +54,7 @@ Although "consent" requests must still be verified for technical correctness,
 they **MUST** be granted by default since *account data is never to be shared with external entities*
 (a locally installed and trusted "Wallet" service is effectively like an extension to the on-line bank).
 
-Note: skipping consent requests is not an option since that would break Open Banking APIs.
+Note: skipping consent requests is though not an option since that would break Open Banking APIs.
 ### 6. Optional: Reuse the On-line Bank Login
 In a fully integrated solution the virtual payment card enrollment service would
 preferably reuse the regular on-line bank login.  That is, the service would
@@ -62,4 +65,4 @@ simply appear as an additional choice in the on-line bank.
 
 &nbsp;
 
-Version 0.3, 2020-02-10
+Version 0.31, 2020-04-21
